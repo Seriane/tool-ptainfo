@@ -23,7 +23,6 @@ return function (Layer, ptainfo, ref)
   ptainfo.run = function (options)
     local model = options.model.pta
     print ("clocks: ")
-
     for k,v in pairs (model.clocks) do
     
      print(model.clocks[k].value.."\n")
@@ -52,7 +51,7 @@ return function (Layer, ptainfo, ref)
      
       print("name: "..k.."\n")
 
-      for i=1, table.getn(model.transitions[k].arrows) do
+      for i=1, #model.transitions[k].arrows do
      
         if model.transitions[k].arrows[i].input then
      
@@ -81,8 +80,6 @@ return function (Layer, ptainfo, ref)
     end
 
 end
-
-return ptainfo
+  return ptainfo
 
 end
-

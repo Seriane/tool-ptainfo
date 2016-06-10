@@ -9,7 +9,7 @@ description = {
   summary     = "Show clocks, parameters, states, transitions of a pta.",
   detailed    = [[]],
   license     = "MIT/X11",
-  maintainer  = "Nizar Hdadech",
+  maintainer  = "Alban Linard <alban@linard.fr>",
 }
 
 dependencies = {
@@ -20,7 +20,7 @@ dependencies = {
 build = {
   type    = "builtin",
   modules = {
-    ["cosy.tool.ptainfo"       ] = "src/cosy/tool/graphinfo.lua",
+    ["cosy.tool.ptainfo"       ] = "src/cosy/tool/ptainfo.lua",
     ["cosy.tool.ptainfo-test"  ] = "src/cosy/tool/ptainfo-test.lua",
   },
 }

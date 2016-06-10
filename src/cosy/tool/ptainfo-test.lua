@@ -1,12 +1,12 @@
 return function (Layer, instance, ref)
-
+--local Layer = require "layeredata"
+--local instance = Layer.new {}
 local meta       =  Layer.key.meta
 local refines    =  Layer.key.refines
-
 local collection  = Layer.require "cosy/formalism/data.collection"
+local record  = Layer.require "cosy/formalism/data.record"
 
-local parametric_timed_automaton  = Layer.require "cosy/formalism/automaton/parametric_timed_automaton"
-
+local parametric_timed_automaton  = Layer.require "cosy/formalism/automaton/timed_automaton/parametric_timed_automaton"
 
 local relational_operation  = Layer.require "cosy/formalism/operation/relational_operation"
 
@@ -15,21 +15,21 @@ local equal_operation = Layer.require "cosy/formalism/operation/equal_operation"
 local superiorequal_operation = Layer.require "cosy/formalism/operation/superiorequal_operation"
 local and_operation = Layer.require "cosy/formalism/operation/and_operation"
 
-instance [refines] = {
-  parametric_timed_automaton,
-}
-
 local operands_type_relational = Layer.new{}
 
+instance [refines] = {
+  parametric_timed_automaton
+}
 
-instance[meta].parameter_type.value.value_type="string"
-instance [meta].alphabet_type.value.value_type="string"
+instance [meta].parameter_type [meta][record].value.value_type="string"
+instance.actions [meta][collection].value_type [meta][record].value.value_type="string"
 
-instance.parameters_type [refines] = {
+instance [meta].parameter_type [refines] = {
   relational_operation,
 }
 
-instance  [meta] = {
+
+instance [meta] = {
   number_type = {
     [refines] = {
       Layer.require "cosy/formalism/literal/number",
@@ -41,17 +41,19 @@ relational_operation [refines] = {
   operands_type_relational,
 }
 
-instance[meta].parameter_type = {
+instance [meta].parameter_type = {
   [refines] = {
     operands_type_relational,
   }
 }
-instance[meta].clock_type = {
+instance [meta].clock_type = {
   [refines] = {
     operands_type_relational,
   }
 }
 
+
+--print(instance.clocks)
 instance.clocks = {
   y = {
     value="y",
@@ -447,6 +449,5 @@ instance.transitions = {
 
 }
 
-
-return  instance
+  return instance
 end
